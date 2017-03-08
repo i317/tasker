@@ -1,0 +1,27 @@
+{% block body %}
+<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--jQuery hosted remotely from Google-->
+		<script type=text/javascript>
+			$(function() {											
+			  $('a#process_input').bind('click', function() {		/*bind id (process_input) to click*/	/* Renders function based on click*/
+				$.getJSON('/background_process', {					/*Get JSON return from '/background_process'*/					
+				  answer: $('input[name="proglang"]').val(),		/*assigns user input*/			
+				}, function(data) {											
+				  $("#result").text(data.result);					/*return JSON from URL*/
+				});
+				return false;
+			  });
+			});
+		</script>
+	</head>
+	<body>
+		<div class='container'>
+		<h3>Welcome! Which is the best programming language of them all?</h3>
+			<form>
+				<input type=text size=5 name=proglang>
+				<a href='#' id=process_input><button class='btn btn-default'>Submit</button></a>
+			</form>
+		<p id=result></p>
+		</div>
+	</body>
+{% endblock %}
